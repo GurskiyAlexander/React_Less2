@@ -1,10 +1,10 @@
 import React from 'react'
-import { StackParamList } from '@app/app-navigation/models'
+import { StackParamList } from '@app/app-navigation/types'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useTheme } from '@shared/hooks'
-import { Service } from '@flows/some-flow-name/pages/service'
-import { PaymentsCategory } from '@flows/some-flow-name/pages/payment'
-import { PaymentsFlow } from '@flows/some-flow-name/pages/payments'
+import { ServicePage } from '@flows/payments/pages/service'
+import { PaymentsCategoryPage } from '@flows/payments/pages/payment'
+import { PaymentsPage } from '@flows/payments'
 
 const Stack = createNativeStackNavigator<StackParamList>()
 
@@ -23,17 +23,17 @@ export const PaymentsScreenNavigator = () => {
     >
       <Stack.Screen
         name="payments"
-        component={PaymentsFlow}
-        options={{ title: 'Платежи', headerShown: false }}
+        component={PaymentsPage}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="paymentsCategory"
-        component={PaymentsCategory}
+        component={PaymentsCategoryPage}
         options={({ route }) => ({ title: route.params.title })}
       />
       <Stack.Screen
         name="service"
-        component={Service}
+        component={ServicePage}
         options={({ route }) => ({ title: route.params.title })}
       />
     </Stack.Navigator>

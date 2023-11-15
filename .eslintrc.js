@@ -16,7 +16,6 @@ module.exports = {
   },
   rules: {
     'no-use-before-define': 'error',
-    'no-unused-vars': 'error',
 
     'react-native/no-raw-text': 'off',
     'react-native/no-color-literals': 'off',

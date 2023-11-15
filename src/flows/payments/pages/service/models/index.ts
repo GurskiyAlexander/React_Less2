@@ -1,0 +1,1 @@
+export { PhoneFormat } from "../../../../../shared/utils/validate_phone_number";

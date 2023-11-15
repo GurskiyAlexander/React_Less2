@@ -1,1 +1,0 @@
-export { PaymentsCategory } from "./payment";
