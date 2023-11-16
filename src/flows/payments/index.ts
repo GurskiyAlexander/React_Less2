@@ -1,1 +1,1 @@
-export { PaymentsPage } from "./pages/payments-page";
+export { PaymentCategoryListPage } from "./pages/payments-page/payment-category-list-page";

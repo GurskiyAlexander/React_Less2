@@ -3,8 +3,8 @@ import { StackParamList } from '@app/app-navigation/types'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useTheme } from '@shared/hooks'
 import { ServicePage } from '@flows/payments/pages/service'
-import { PaymentsCategoryPage } from '@flows/payments/pages/payment'
-import { PaymentsPage } from '@flows/payments'
+import { PaymentsCategoryPage } from '@flows/payments/pages/payment/payments-category-page'
+import { PaymentCategoryListPage } from '@flows/payments'
 
 const Stack = createNativeStackNavigator<StackParamList>()
 
@@ -23,7 +23,7 @@ export const PaymentsScreenNavigator = () => {
     >
       <Stack.Screen
         name="payments"
-        component={PaymentsPage}
+        component={PaymentCategoryListPage}
         options={{ headerShown: false }}
       />
       <Stack.Screen

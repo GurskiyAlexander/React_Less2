@@ -1,6 +1,7 @@
 import { styled } from '@shared/ui/theme'
 import { FlatList } from 'react-native'
 import { ServiceUI } from '@flows/payments/types'
+
 export const FlexWrapper = styled.View`
   flex: 1
   background-color: ${({ theme }) => theme.palette.background.primary};

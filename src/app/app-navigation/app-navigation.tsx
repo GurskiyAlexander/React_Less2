@@ -13,7 +13,7 @@ import {
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 
 import { PaymentsScreenNavigator } from './paymentsScreenNavigator'
-import { TabBarLabel } from './ui/atoms'
+import { TabBarLabel } from './ui/tab-bar-label'
 
 const Tabs = createBottomTabNavigator()
 

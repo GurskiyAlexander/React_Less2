@@ -3,10 +3,10 @@ import { FlatList } from 'react-native'
 import { useEffect, useState } from 'react'
 import { styled } from '@shared/ui/theme'
 import { Typography } from '@shared/ui/atoms'
-import { Separator } from '@shared/ui/atoms/separator'
+import { Separator } from '@shared/ui/atoms/separator/separator'
 
-import { CostSnack } from './costSnack'
-import { TitleView } from './titleView'
+import { CostSnack } from '../cost-snack/cost-snack'
+import { TitleView } from '../title-view/title-view'
 
 const costs = ['100', '500', '1000', '2500', '5000']
 const cashback = 10

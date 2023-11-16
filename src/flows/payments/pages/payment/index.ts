@@ -1,1 +1,0 @@
-export { PaymentsCategoryPage } from "./pages/payment-page";

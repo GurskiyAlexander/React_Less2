@@ -1,6 +1,6 @@
 import { CategoriesResponse } from "../types"
 
-export const PaymentParser = ({ categories }: CategoriesResponse) => {
+export const mapPaymentToUi = ({ categories }: CategoriesResponse) => {
     return categories.map(item => ({
         categoryId: item.category_id,
         categoryName: item.category_name,

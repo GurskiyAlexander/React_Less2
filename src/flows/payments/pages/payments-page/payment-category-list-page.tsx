@@ -6,9 +6,9 @@ import axios from 'axios'
 import { Typography } from '@shared/ui/atoms'
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types'
 
-import { CategoryUI } from '../types'
-import { PaymentParser } from '../mappers/map-payment-to-ui'
-import { CategoriesList } from '../ui/atoms/category-list'
+import { CategoryUI } from '../../types'
+import { mapPaymentToUi } from '../../mappers/map-payment-to-ui'
+import { CategoriesList } from '../../ui/molecules/category-list/category-list'
 
 const Wrapper = styled.View`
   flex: 1;
@@ -37,9 +37,14 @@ const PaymentsHeader = () => {
   )
 }
 
-type PaymentsPageProps = NativeStackScreenProps<StackParamList, 'payments'>
+type PaymentCategoryListPageProps = NativeStackScreenProps<
+  StackParamList,
+  'payments'
+>
 
-export const PaymentsPage = ({ navigation }: PaymentsPageProps) => {
+export const PaymentCategoryListPage = ({
+  navigation,
+}: PaymentCategoryListPageProps) => {
   const [categories, setCategories] = useState<CategoryUI[]>()
 
   const fetchPayments = async () => {
@@ -47,7 +52,7 @@ export const PaymentsPage = ({ navigation }: PaymentsPageProps) => {
       'https://github.com/kode-frontend/files/raw/main/categories.json',
     )
     const data = response.data
-    const payments = PaymentParser({ categories: data.category })
+    const payments = mapPaymentToUi({ categories: data.category })
     setCategories(payments)
   }
 

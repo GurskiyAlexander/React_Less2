@@ -6,7 +6,7 @@ import { styled } from '@shared/ui/theme'
 import { useHeaderHeight } from '@react-navigation/elements'
 import { Alert, Keyboard, TouchableOpacity, View } from 'react-native'
 
-import { CostView, PhoneInput, CardView, Button } from '../components'
+import { CostView, PhoneInput, CardView, Button } from './ui'
 
 const SafeAreaWrapper = styled.SafeAreaView`
   flex: 1;

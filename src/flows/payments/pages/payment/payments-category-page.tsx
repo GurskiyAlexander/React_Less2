@@ -4,7 +4,7 @@ import { useTheme } from '@shared/hooks'
 import { StackParamList } from '@app/app-navigation/types'
 import { IconSearch } from '@shared/ui/icons'
 import { TemplateView, Separator } from '@shared/ui/atoms'
-import { TitledImageItem } from '@flows/payments/ui/atoms/title_image_item'
+import { TitledImageItem } from '@flows/payments/ui/molecules/title-image-item/title-image-item'
 
 import {
   WrapperKeyboardAvoiding,
@@ -12,8 +12,8 @@ import {
   ServicesFlatList,
   SearchTextInput,
   FlexWrapper,
-} from '../ui/atoms'
-import { ServiceUI } from '../../../types'
+} from './ui/atoms'
+import { ServiceUI } from '../../types'
 
 type PaymentsCategoryProps = NativeStackScreenProps<
   StackParamList,

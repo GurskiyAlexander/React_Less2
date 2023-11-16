@@ -3,7 +3,7 @@ import { styled } from '@shared/ui/theme'
 import { Icon2CardPay, IconChevronDown } from '@shared/ui/icons'
 import { Typography } from '@shared/ui/atoms'
 
-import { TitleView } from './titleView'
+import { TitleView } from '../title-view/title-view'
 
 const CardWrapper = styled.View`
   padding: 16px;
@@ -29,7 +29,7 @@ export const CardView = () => {
           <Typography variant="body15Regular">Карта зарплатная</Typography>
           <Typography variant="caption1">457 334,00 ₽</Typography>
         </TextWrapper>
-        {IconChevronDown({ size: 24, color: '#706D76' })}
+        <IconChevronDown size={24} color="#706D76" />
       </CardWrapper>
     </Wrapper>
   )

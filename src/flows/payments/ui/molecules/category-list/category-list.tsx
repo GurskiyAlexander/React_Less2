@@ -1,10 +1,10 @@
 import { CategoryUI } from '@flows/payments/types'
-import { Separator } from '@shared/ui/atoms/separator'
+import { Separator } from '@shared/ui/atoms/separator/separator'
 import { styled } from '@shared/ui/theme'
 import React from 'react'
 import { FlatList } from 'react-native'
 
-import { TitledImageItem } from './title_image_item'
+import { TitledImageItem } from '../title-image-item/title-image-item'
 
 const CategoryFlatList = styled(FlatList<CategoryUI>)`
   flex: 1;

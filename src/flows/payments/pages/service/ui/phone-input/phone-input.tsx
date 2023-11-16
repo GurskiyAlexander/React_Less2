@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ImageSourcePropType } from 'react-native'
 import { styled } from '@shared/ui/theme'
-import { validatePhoneNumber } from '@shared/utils/validate_phone_number'
+import { validatePhoneNumber } from '@shared/utils/validate-phone-number'
 
 type PhoneTextInputProps = {
   isValid: boolean
