@@ -1,40 +1,121 @@
 import React from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { SomeFlowPageConnector } from '@flows/some-flow-name'
-import { styled } from '@ui/theme'
-import { Typography } from '@ui/atoms'
+import { MainPage } from '@flows/main'
+import { ProfilePage } from '@flows/profile'
 import { useTheme } from '@shared/hooks'
+import { AtmsPage } from '@flows/atms/pages/atms-page'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import {
+  IconBankAccount,
+  IconMainProduct,
+  IconPayment,
+  IconUser,
+} from '@shared/ui/icons'
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 
-const Wrapper = styled.View`
-  background-color: ${({ theme }) => theme.palette.background.primary};
-  flex: 1;
-  padding: 16px;
-`
+import { PaymentsScreenNavigator } from './paymentsScreenNavigator'
+import { TabBarLabel } from './ui/tab-bar-label'
 
-const Stack = createNativeStackNavigator()
+const Tabs = createBottomTabNavigator()
 
 export const AppNavigation = () => {
   const theme = useTheme()
 
   return (
-    <Stack.Navigator
+    <Tabs.Navigator
       screenOptions={{
-        headerStyle: {
+        tabBarStyle: {
           backgroundColor: theme.palette.background.primary,
+          borderTopWidth: 0,
         },
-        headerTintColor: theme.palette.text.primary,
+        headerTintColor: 'white',
         headerShadowVisible: false,
-        headerBackTitleVisible: false,
+        headerShown: false,
       }}
     >
-      <Stack.Screen name="home" component={SomeFlowPageConnector} />
-      <Stack.Screen name="profile">
-        {(props) => (
-          <Wrapper {...props}>
-            <Typography variant="largeTitle">Profile page!</Typography>
-          </Wrapper>
-        )}
-      </Stack.Screen>
-    </Stack.Navigator>
+      <Tabs.Screen
+        name="Главная"
+        component={MainPage}
+        options={{
+          tabBarLabel: ({ focused }) => (
+            <TabBarLabel isFocused={focused} title={'Главная'} />
+          ),
+          tabBarIcon: ({ focused }) => (
+            <IconMainProduct
+              size={24}
+              color={
+                focused
+                  ? theme.palette.accent.secondary
+                  : theme.palette.text.secondary
+              }
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Платежи"
+        component={PaymentsScreenNavigator}
+        options={({ route }) => ({
+          tabBarLabel: ({ focused }) => (
+            <TabBarLabel isFocused={focused} title={'Платежи'} />
+          ),
+          tabBarIcon: ({ focused }) => (
+            <IconPayment
+              size={24}
+              color={
+                focused
+                  ? theme.palette.accent.secondary
+                  : theme.palette.text.secondary
+              }
+            />
+          ),
+          tabBarStyle: {
+            display:
+              getFocusedRouteNameFromRoute(route) == 'payments'
+                ? 'flex'
+                : 'none',
+            backgroundColor: theme.palette.background.primary,
+            borderTopWidth: 0,
+          },
+        })}
+      />
+      <Tabs.Screen
+        name="ATMs"
+        component={AtmsPage}
+        options={{
+          tabBarLabel: ({ focused }) => (
+            <TabBarLabel isFocused={focused} title={'Банкоматы'} />
+          ),
+          tabBarIcon: ({ focused }) => (
+            <IconBankAccount
+              size={24}
+              color={
+                focused
+                  ? theme.palette.accent.secondary
+                  : theme.palette.text.secondary
+              }
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Профиль"
+        component={ProfilePage}
+        options={{
+          tabBarLabel: ({ focused }) => (
+            <TabBarLabel isFocused={focused} title={'Профиль'} />
+          ),
+          tabBarIcon: ({ focused }) => (
+            <IconUser
+              size={24}
+              color={
+                focused
+                  ? theme.palette.accent.secondary
+                  : theme.palette.text.secondary
+              }
+            />
+          ),
+        }}
+      />
+    </Tabs.Navigator>
   )
 }

@@ -3,7 +3,7 @@ import { DevSettings, SafeAreaView } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
 import { AppNavigation } from '@app/app-navigation'
-import { AppThemeProvider, styled } from '@ui/theme'
+import { AppThemeProvider, styled } from '@shared/ui/theme'
 
 import { Storybook } from '../../.storybook'
 
@@ -18,7 +18,7 @@ const StorybookButtonText = styled.Text`
   text-align: center;
 `
 
-const SafeArea = styled(SafeAreaView)`
+const Wrapper = styled.View`
   flex: 1;
 `
 
@@ -37,12 +37,12 @@ export const App = () => {
       <StrictMode>
         <AppThemeProvider>
           <SafeAreaProvider>
-            <SafeArea>
+            <Wrapper>
               <Storybook />
               <StorybookButton onPress={() => setIsStorybookVisible(false)}>
                 <StorybookButtonText>OPEN APP</StorybookButtonText>
               </StorybookButton>
-            </SafeArea>
+            </Wrapper>
           </SafeAreaProvider>
         </AppThemeProvider>
       </StrictMode>
@@ -54,9 +54,9 @@ export const App = () => {
       <AppThemeProvider>
         <NavigationContainer>
           <SafeAreaProvider>
-            <SafeArea>
+            <Wrapper>
               <AppNavigation />
-            </SafeArea>
+            </Wrapper>
           </SafeAreaProvider>
         </NavigationContainer>
       </AppThemeProvider>
