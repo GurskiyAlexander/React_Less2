@@ -1,10 +1,10 @@
 import React, { StrictMode } from 'react'
-import { DevSettings, SafeAreaView } from 'react-native'
+import { DevSettings } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
-import { AppNavigation } from 'pages/ui'
 import { AppThemeProvider, styled } from '@shared/ui/theme'
 
+import { AppNavigation } from './app-navigation/app-navigation'
 import { Storybook } from '../../.storybook'
 
 const StorybookButton = styled.TouchableOpacity`

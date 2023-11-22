@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useTheme } from '@shared/hooks'
-import { StackParamList } from '@entities/common/models/stack-param-list'
+import { StackParamList } from '@app/app-navigation/types'
 import { IconSearch } from '@shared/ui/icons'
 import { TemplateView, Separator } from '@shared/ui/atoms'
-import { TitledImageItem } from 'pages/screens/payments/ui/molecules/title-image-item/title-image-item'
+import { TitledImageItem } from '@flows/pages/payments/ui/molecules/title-image-item/title-image-item'
 
 import {
   WrapperKeyboardAvoiding,
@@ -13,7 +13,7 @@ import {
   SearchTextInput,
   FlexWrapper,
 } from './ui/atoms'
-import { ServiceUI } from '../../../../../entities/payments/models/types'
+import { ServiceUI } from '../../../../entities/payments/types'
 
 type PaymentsCategoryProps = NativeStackScreenProps<
   StackParamList,

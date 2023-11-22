@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { ActivityIndicator } from 'react-native'
 import { styled } from '@shared/ui/theme'
-import { StackParamList } from '@entities/common/models/stack-param-list'
+import { StackParamList } from '@app/app-navigation/types'
 import axios from 'axios'
 import { Typography } from '@shared/ui/atoms'
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types'
 
-import { CategoryUI } from '../../../../../entities/payments/models/types'
-import { mapPaymentToUi } from '../../../../../entities/payments/models/map-payment-to-ui'
-import { CategoriesList } from '../../ui/molecules/category-list/category-list'
+import { CategoryUI } from '../../../../entities/payments/types'
+import { mapPaymentToUi } from '../../../../entities/payments/model/mappers/map-payment-to-ui'
+import { CategoriesList } from '../ui/molecules/category-list/category-list'
 
 const Wrapper = styled.View`
   flex: 1;

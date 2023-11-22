@@ -1,8 +1,6 @@
 import React from 'react'
-import { MainPage } from 'pages/screens/main'
-import { ProfilePage } from 'pages/screens/profile-page'
+import { MainPage, AtmsPage, ProfilePage } from '@flows/pages'
 import { useTheme } from '@shared/hooks'
-import { AtmsPage } from 'pages/screens/atms/pages/atms-page'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
   IconBankAccount,

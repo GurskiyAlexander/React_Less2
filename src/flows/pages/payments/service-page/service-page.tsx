@@ -1,6 +1,6 @@
 import React from 'react'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { StackParamList } from '@entities/common/models/stack-param-list'
+import { StackParamList } from '@app/app-navigation/types'
 import { useState } from 'react'
 import { styled } from '@shared/ui/theme'
 import { useHeaderHeight } from '@react-navigation/elements'

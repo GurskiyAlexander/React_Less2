@@ -1,4 +1,4 @@
-import { ServiceUI } from "@entities/payments/models/types";
+import { ServiceUI } from "@entities/payments/types";
 
 export type StackParamList = {
     payments: undefined,
@@ -10,5 +10,4 @@ export type StackParamList = {
         title: string,
         service: ServiceUI
     },
-    
 }
