@@ -4,10 +4,14 @@ export type StackParamList = {
     payments: undefined,
     paymentsCategory: {
         title: string,
-        services: ServiceUI[]
+        id: string
     }
     service: {
         title: string,
         service: ServiceUI
     },
+    success: {
+        sum: number,
+        isSuccess: boolean
+    }
 }

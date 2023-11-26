@@ -1,5 +1,5 @@
 import React from 'react'
-import { TemplateView } from '@shared/ui/atoms'
+import { TemplateView } from '@shared/ui/molecules'
 
 export const MainPage = () => {
   return <TemplateView title="Главная страница!" />

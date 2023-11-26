@@ -1,4 +1,4 @@
-import { TemplateView } from '@shared/ui/atoms'
+import { TemplateView } from '@shared/ui/molecules'
 import React from 'react'
 
 export const AtmsPage = () => {

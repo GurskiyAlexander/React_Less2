@@ -2,7 +2,8 @@ import { CategoryUI } from '@entities/payments/types'
 import { Separator } from '@shared/ui/atoms/separator/separator'
 import { styled } from '@shared/ui/theme'
 import React from 'react'
-import { FlatList } from 'react-native'
+import { FlatList, RefreshControl } from 'react-native'
+import { fetchCategoriesFx } from '@entities/payments/model/category-store'
 
 import { TitledImageItem } from '../title-image-item/title-image-item'
 
@@ -16,8 +17,20 @@ type CategoriesListProps = {
 }
 
 export const CategoriesList = ({ data, onPress }: CategoriesListProps) => {
+  const [refreshing, setRefreshing] = React.useState(false)
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true)
+    setTimeout(() => {
+      fetchCategoriesFx(true)
+      setRefreshing(false)
+    }, 2000)
+  }, [])
+
   return (
     <CategoryFlatList
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
       data={data}
       renderItem={({ item }) => (
         <TitledImageItem

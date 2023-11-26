@@ -4,8 +4,11 @@ import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
 import { AppThemeProvider, styled } from '@shared/ui/theme'
 
+import { SnackBar } from '@shared/ui/molecules/snackbar/snackbar'
+
 import { AppNavigation } from './app-navigation/app-navigation'
 import { Storybook } from '../../.storybook'
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 
 const StorybookButton = styled.TouchableOpacity`
   height: 32px;
@@ -21,6 +24,8 @@ const StorybookButtonText = styled.Text`
 const Wrapper = styled.View`
   flex: 1;
 `
+
+const queryClient = new QueryClient()
 
 export const App = () => {
   const [isStorybookVisible, setIsStorybookVisible] = React.useState(false)
@@ -52,13 +57,16 @@ export const App = () => {
   return (
     <StrictMode>
       <AppThemeProvider>
-        <NavigationContainer>
-          <SafeAreaProvider>
-            <Wrapper>
-              <AppNavigation />
-            </Wrapper>
-          </SafeAreaProvider>
-        </NavigationContainer>
+        <QueryClientProvider client={queryClient}>
+          <NavigationContainer>
+            <SafeAreaProvider>
+              <Wrapper>
+                <AppNavigation />
+                <SnackBar />
+              </Wrapper>
+            </SafeAreaProvider>
+          </NavigationContainer>
+        </QueryClientProvider>
       </AppThemeProvider>
     </StrictMode>
   )

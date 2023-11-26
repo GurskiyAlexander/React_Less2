@@ -9,7 +9,6 @@ import { CostSnack } from '../cost-snack/cost-snack'
 import { TitleView } from '../title-view/title-view'
 
 const costs = ['100', '500', '1000', '2500', '5000']
-const cashback = 10
 
 const MainWrapper = styled.View`
   background-color: ${({ theme }) => theme.palette.background.secondary};
@@ -49,9 +48,14 @@ const CashbackTitle = styled(Typography)`
 export type CostViewProps = {
   onValueChanged: (value: string) => void
   isValid: boolean
+  cashback: number
 }
 
-export const CostView = ({ onValueChanged, isValid }: CostViewProps) => {
+export const CostView = ({
+  onValueChanged,
+  isValid,
+  cashback,
+}: CostViewProps) => {
   const [isActive, setActive] = useState(false)
   const [cost, setCost] = useState('0 ₽')
 
@@ -102,7 +106,8 @@ export const CostView = ({ onValueChanged, isValid }: CostViewProps) => {
         />
       ) : (
         <CashbackTitle variant="caption1">
-          Ваш кешбек составит 10% - {getCostForRub() / cashback} ₽
+          Ваш кешбек составит {cashback}% - {getCostForRub() * (cashback / 100)}{' '}
+          ₽
         </CashbackTitle>
       )}
     </MainWrapper>

@@ -4,9 +4,10 @@ import { StackParamList } from '@app/app-navigation/types'
 import { useState } from 'react'
 import { styled } from '@shared/ui/theme'
 import { useHeaderHeight } from '@react-navigation/elements'
-import { Alert, Keyboard, TouchableOpacity, View } from 'react-native'
+import { Keyboard, TouchableOpacity, View } from 'react-native'
 
 import { CostView, PhoneInput, CardView, Button } from './ui'
+import { ServicePageContainer } from './service-page.container'
 
 const SafeAreaWrapper = styled.SafeAreaView`
   flex: 1;
@@ -23,29 +24,17 @@ const Wrapper = styled.KeyboardAvoidingView`
 
 type PaymentScreenProps = NativeStackScreenProps<StackParamList, 'service'>
 
-const maxCost = 20000
-const phoneNumberCorrectLength = 18
-
-export const ServicePage = ({ route }: PaymentScreenProps) => {
+export const ServicePage = ({ route, navigation }: PaymentScreenProps) => {
   const [phone, setPhone] = useState('')
   const [cost, setCost] = useState('')
-  const [isValidPhone, setIsValidPhone] = useState(true)
-  const [isValidCost, setIsValidCost] = useState(true)
   const headerHeight = useHeaderHeight()
-
-  const validateValues = () => {
-    setIsValidPhone(phone.length == phoneNumberCorrectLength)
-    setIsValidCost(Number(cost) > 1 && Number(cost) < maxCost)
-    Alert.alert(
-      phone.length == phoneNumberCorrectLength &&
-        Number(cost) > 1 &&
-        Number(cost) < maxCost
-        ? 'Успех'
-        : 'Проверьте введенные данные',
-      undefined,
-      [{ text: 'OK' }],
-    )
-  }
+  const { isValidPhone, isValidCost, validateValues, cashBack } =
+    ServicePageContainer({
+      serviceInfo: route.params.service,
+      phone: phone,
+      cost: cost,
+      navigation: navigation,
+    })
 
   return (
     <SafeAreaWrapper>
@@ -59,7 +48,11 @@ export const ServicePage = ({ route }: PaymentScreenProps) => {
               isValid={isValidPhone}
               placeholder="Номер телефона"
             />
-            <CostView onValueChanged={setCost} isValid={isValidCost} />
+            <CostView
+              onValueChanged={setCost}
+              isValid={isValidCost}
+              cashback={cashBack}
+            />
           </View>
         </TouchableOpacity>
       </Wrapper>

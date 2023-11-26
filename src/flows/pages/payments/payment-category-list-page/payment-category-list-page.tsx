@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { ActivityIndicator } from 'react-native'
 import { styled } from '@shared/ui/theme'
 import { StackParamList } from '@app/app-navigation/types'
-import axios from 'axios'
 import { Typography } from '@shared/ui/atoms'
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types'
 
 import { CategoryUI } from '../../../../entities/payments/types'
-import { mapPaymentToUi } from '../../../../entities/payments/model/mappers/map-payment-to-ui'
 import { CategoriesList } from '../ui/molecules/category-list/category-list'
+import { useStore } from 'effector-react'
+import {
+  $fetchCategories,
+  fetchCategoriesFx,
+} from '@entities/payments/model/category-store'
 
 const Wrapper = styled.View`
   flex: 1;
@@ -45,37 +48,28 @@ type PaymentCategoryListPageProps = NativeStackScreenProps<
 export const PaymentCategoryListPage = ({
   navigation,
 }: PaymentCategoryListPageProps) => {
-  const [categories, setCategories] = useState<CategoryUI[]>()
-
-  const fetchPayments = async () => {
-    const response = await axios.get(
-      'https://github.com/kode-frontend/files/raw/main/categories.json',
-    )
-    const data = response.data
-    const payments = mapPaymentToUi({ categories: data.category })
-    setCategories(payments)
-  }
+  const { data, isLoading } = useStore($fetchCategories)
 
   useEffect(() => {
-    fetchPayments()
+    fetchCategoriesFx()
   }, [])
 
   const goToPaymentsCategory = (category: CategoryUI) => {
     navigation.navigate('paymentsCategory', {
       title: category.categoryName,
-      services: category.services,
+      id: category.categoryId,
     })
   }
 
   return (
     <Wrapper>
       <PaymentsHeader />
-      {!categories ? (
+      {!data && isLoading ? (
         <ActivityIndicatorContainer>
           <ActivityIndicator size="large" />
         </ActivityIndicatorContainer>
       ) : (
-        <CategoriesList data={categories} onPress={goToPaymentsCategory} />
+        <CategoriesList data={data!} onPress={goToPaymentsCategory} />
       )}
     </Wrapper>
   )

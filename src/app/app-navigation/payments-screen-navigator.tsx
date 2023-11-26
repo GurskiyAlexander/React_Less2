@@ -7,6 +7,7 @@ import {
   PaymentsCategoryPage,
   PaymentCategoryListPage,
 } from '@flows/pages'
+import { SuccessPage } from '@flows/pages/payments/success-page/succes-page'
 
 const Stack = createNativeStackNavigator<StackParamList>()
 
@@ -37,6 +38,11 @@ export const PaymentsScreenNavigator = () => {
         name="service"
         component={ServicePage}
         options={({ route }) => ({ title: route.params.title })}
+      />
+      <Stack.Screen
+        name="success"
+        component={SuccessPage}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   )
