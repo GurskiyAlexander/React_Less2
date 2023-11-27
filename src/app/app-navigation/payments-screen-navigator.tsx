@@ -2,9 +2,11 @@ import React from 'react'
 import { StackParamList } from '@app/app-navigation/types'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useTheme } from '@shared/hooks'
-import { ServicePage } from '@flows/payments/pages/service'
-import { PaymentsCategoryPage } from '@flows/payments/pages/payment/payments-category-page'
-import { PaymentCategoryListPage } from '@flows/payments'
+import {
+  ServicePage,
+  PaymentsCategoryPage,
+  PaymentCategoryListPage,
+} from '@flows/pages'
 
 const Stack = createNativeStackNavigator<StackParamList>()
 

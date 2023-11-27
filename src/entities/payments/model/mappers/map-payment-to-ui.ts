@@ -1,4 +1,4 @@
-import { CategoriesResponse } from "../types"
+import { CategoriesResponse } from "../../types"
 
 export const mapPaymentToUi = ({ categories }: CategoriesResponse) => {
     return categories.map(item => ({

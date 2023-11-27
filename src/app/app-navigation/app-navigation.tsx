@@ -1,8 +1,6 @@
 import React from 'react'
-import { MainPage } from '@flows/main'
-import { ProfilePage } from '@flows/profile'
+import { MainPage, AtmsPage, ProfilePage } from '@flows/pages'
 import { useTheme } from '@shared/hooks'
-import { AtmsPage } from '@flows/atms/pages/atms-page'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
   IconBankAccount,
@@ -12,7 +10,7 @@ import {
 } from '@shared/ui/icons'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 
-import { PaymentsScreenNavigator } from './paymentsScreenNavigator'
+import { PaymentsScreenNavigator } from './payments-screen-navigator'
 import { TabBarLabel } from './ui/tab-bar-label'
 
 const Tabs = createBottomTabNavigator()

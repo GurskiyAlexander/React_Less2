@@ -1,4 +1,4 @@
-import { CategoryUI } from '@flows/payments/types'
+import { CategoryUI } from '@entities/payments/types'
 import { Separator } from '@shared/ui/atoms/separator/separator'
 import { styled } from '@shared/ui/theme'
 import React from 'react'

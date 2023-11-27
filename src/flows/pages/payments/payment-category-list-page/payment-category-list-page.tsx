@@ -6,9 +6,9 @@ import axios from 'axios'
 import { Typography } from '@shared/ui/atoms'
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types'
 
-import { CategoryUI } from '../../types'
-import { mapPaymentToUi } from '../../mappers/map-payment-to-ui'
-import { CategoriesList } from '../../ui/molecules/category-list/category-list'
+import { CategoryUI } from '../../../../entities/payments/types'
+import { mapPaymentToUi } from '../../../../entities/payments/model/mappers/map-payment-to-ui'
+import { CategoriesList } from '../ui/molecules/category-list/category-list'
 
 const Wrapper = styled.View`
   flex: 1;

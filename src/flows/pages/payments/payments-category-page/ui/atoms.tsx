@@ -1,6 +1,6 @@
 import { styled } from '@shared/ui/theme'
 import { FlatList } from 'react-native'
-import { ServiceUI } from '@flows/payments/types'
+import { ServiceUI } from '@entities/payments/types'
 
 export const FlexWrapper = styled.View`
   flex: 1

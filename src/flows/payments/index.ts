@@ -1,1 +1,0 @@
-export { PaymentCategoryListPage } from "./pages/payments-page/payment-category-list-page";
