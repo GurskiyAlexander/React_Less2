@@ -6,8 +6,8 @@ import {
   ServicePage,
   PaymentsCategoryPage,
   PaymentCategoryListPage,
-} from '@flows/pages'
-import { SuccessPage } from '@flows/pages/payments/success-page/succes-page'
+} from '@flows/index'
+import { SuccessPage } from '@flows/payments/success-page/succes-page'
 
 const Stack = createNativeStackNavigator<StackParamList>()
 

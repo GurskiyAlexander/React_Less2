@@ -4,7 +4,7 @@ import { useTheme } from '@shared/hooks'
 import { StackParamList } from '@app/app-navigation/types'
 import { IconSearch } from '@shared/ui/icons'
 import { TemplateView } from '@shared/ui/molecules'
-import { TitledImageItem } from '@flows/pages/payments/ui/molecules/title-image-item/title-image-item'
+import { TitledImageItem } from '@flows/payments/ui/molecules/title-image-item/title-image-item'
 
 import {
   WrapperKeyboardAvoiding,
