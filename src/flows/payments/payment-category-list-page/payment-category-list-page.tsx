@@ -5,7 +5,7 @@ import { StackParamList } from '@app/app-navigation/types'
 import { Typography } from '@shared/ui/atoms'
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types'
 
-import { CategoryUI } from '../../../../entities/payments/types'
+import { CategoryUI } from '../../../entities/payments/types'
 import { CategoriesList } from '../ui/molecules/category-list/category-list'
 import { useStore } from 'effector-react'
 import {
