@@ -76,7 +76,7 @@ export const SuccessPage = ({ navigation, route }: SuccessScreenProps) => {
         </SumView>
       </CenterWrapper>
       <Button
-        title="Продолжить"
+        title="Готово"
         onPress={() => navigation.navigate('payments')}
       ></Button>
     </Wrapper>
