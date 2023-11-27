@@ -1,1 +1,1 @@
-export { MainPage } from './pages/main-page'
+export { MainPage } from './main-page'
