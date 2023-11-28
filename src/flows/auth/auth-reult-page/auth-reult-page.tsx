@@ -3,11 +3,8 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { View } from 'react-native'
 import React from 'react'
 
-type AuthSuccessPageProps = NativeStackScreenProps<
-  StackParamList,
-  'authSuccess'
->
+type AuthSuccessPageProps = NativeStackScreenProps<StackParamList, 'authResult'>
 
-export const AuthSuccessPage = ({}: AuthSuccessPageProps) => {
+export const AuthResultPage = ({}: AuthSuccessPageProps) => {
   return <View></View>
 }

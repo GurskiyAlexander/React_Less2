@@ -3,7 +3,7 @@ import { StackParamList } from '@app/app-navigation/types'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { styled } from '@shared/ui/theme'
 import { WithTitleButton } from '@shared/ui/molecules'
-import { CircleInfoView, SumView } from '../ui'
+import { CircleInfoView, SumView } from '../ui/molecules'
 
 type Props = NativeStackScreenProps<StackParamList, 'paymentResult'>
 

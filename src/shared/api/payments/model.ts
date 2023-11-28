@@ -12,7 +12,7 @@ export const getCategories = async () => {
   const response = await axios.get<CategoriesResponse>(
     'https://github.com/kode-frontend/files/raw/main/categories.json',
   )
-  
+
   return response.data
 }
 

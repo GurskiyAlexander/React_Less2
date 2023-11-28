@@ -14,4 +14,3 @@ export const useGetService = (serviceID: string) => {
   })
   return query
 }
-

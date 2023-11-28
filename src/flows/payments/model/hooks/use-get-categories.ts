@@ -1,19 +1,20 @@
 import { CategoriesResponse } from '@entities/payments/types'
-import { getPayment } from '@shared/api/payments/model'
+import { getCategories } from '@shared/api/payments/model'
 import { useQuery } from '@tanstack/react-query'
-import { CATEGORY_QUERY_KEYS } from '../query-keys'
+
+import { SERVICE_QUERY_KEYS } from '../query-keys'
 
 type UseQueryResult = {
   data: CategoriesResponse | undefined
   isLoading: boolean
   isError: boolean
+  refetch: () => void
 }
 
 export const useGetCategory = () => {
   const query: UseQueryResult = useQuery({
-    queryKey: CATEGORY_QUERY_KEYS.categoryGet(),
-    queryFn: getPayment,
+    queryKey: SERVICE_QUERY_KEYS.categoryGet(),
+    queryFn: getCategories,
   })
-
   return query
 }

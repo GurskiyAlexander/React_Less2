@@ -2,10 +2,13 @@ import { createAsyncStoragePersister } from '@tanstack/query-async-storage-persi
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { QueryClient } from '@tanstack/react-query'
 
+const dataStorageTime = 86400000
+
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 86400000,
+      staleTime: dataStorageTime,
+      gcTime: dataStorageTime,
       retry: false,
     },
   },

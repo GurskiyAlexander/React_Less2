@@ -1,7 +1,9 @@
 import { useStore } from 'effector-react'
 import { useEffect, useState } from 'react'
+import React from 'react'
 
-import { $snackList, updateSnackList } from './snackbar-store'
+import { $snackList, updateSnackList } from './model/snackbar-store'
+import { SnackBar } from './snackbar'
 
 export const SnackBarContainer = () => {
   const snackList = useStore($snackList)
@@ -24,5 +26,11 @@ export const SnackBarContainer = () => {
     setIsVisible(false)
   }
 
-  return { pressedClose, isVisible }
+  return (
+    <SnackBar
+      pressedClose={pressedClose}
+      isVisible={isVisible}
+      snackList={snackList}
+    />
+  )
 }

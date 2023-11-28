@@ -1,12 +1,10 @@
 import { Typography } from '@shared/ui/atoms'
 import { styled } from '@shared/ui/theme'
-import { useStore } from 'effector-react'
 import React from 'react'
 import { IconClose } from '@shared/ui/icons'
 import { useTheme } from '@shared/hooks'
 
-import { $snackList } from './snackbar-store'
-import { SnackBarContainer } from './snackbar.container'
+import { SnackModel } from './types'
 
 const Container = styled.TouchableOpacity`
   justify-content: space-between;
@@ -20,27 +18,21 @@ const Container = styled.TouchableOpacity`
   border-radius: 16px;
   padding: 16px;
 `
+type Props = {
+  pressedClose: () => void
+  isVisible: boolean
+  snackList: SnackModel[]
+}
 
-const CloseView = styled.View`
-  justify-content: center;
-  align-items: center;
-`
-
-export const SnackBar = () => {
+export const SnackBar = ({ pressedClose, isVisible, snackList }: Props) => {
   const theme = useTheme()
-  const snackList = useStore($snackList)
-  const { pressedClose, isVisible } = SnackBarContainer()
-
   if (!isVisible) {
     return null
   }
-
   return (
     <Container activeOpacity={0.7} onPress={pressedClose}>
       <Typography variant="body15Regular">{snackList[0]?.message}</Typography>
-      <CloseView>
-        <IconClose color={theme.palette.text.primary} />
-      </CloseView>
+      <IconClose color={theme.palette.text.primary} />
     </Container>
   )
 }
