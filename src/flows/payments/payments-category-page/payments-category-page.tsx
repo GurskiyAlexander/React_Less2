@@ -2,8 +2,7 @@ import React from 'react'
 import { useTheme } from '@shared/hooks'
 import { IconSearch } from '@shared/ui/icons'
 import { TemplateView } from '@shared/ui/molecules'
-import { TitledImageItem } from '@flows/payments/ui/molecules/title-image-item/title-image-item'
-
+import { TitleImageItem } from '../ui/molecules'
 import {
   WrapperKeyboardAvoiding,
   TextInputContainer,
@@ -16,7 +15,7 @@ import { styled } from '@shared/ui/theme'
 import { ServiceUI } from '@entities/payments/types'
 
 type Props = {
-  filteredServices: () => ServiceUI[] | undefined
+  filteredServices: ServiceUI[]
   onChangeText: (text: string) => void
   isLoading: boolean
   onPress: (item: ServiceUI) => void
@@ -63,9 +62,9 @@ export const PaymentsCategoryPage = ({
           />
         </TextInputContainer>
         <ServicesFlatList
-          data={filteredServices()}
+          data={filteredServices}
           renderItem={({ item }) => (
-            <TitledImageItem
+            <TitleImageItem
               isCategoryImage={false}
               title={item.serviceName}
               imageUrl={item.serviceIcon}

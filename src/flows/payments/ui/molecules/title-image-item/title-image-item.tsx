@@ -38,7 +38,7 @@ type PropsTitledImageItem = {
   onPress: () => void
 }
 
-export const TitledImageItem = ({
+export const TitleImageItem = ({
   isCategoryImage,
   title,
   imageUrl,

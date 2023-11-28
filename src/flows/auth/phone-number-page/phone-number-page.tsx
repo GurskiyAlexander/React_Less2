@@ -31,7 +31,7 @@ export const PhoneNumberPage = ({}: PhoneNumberPageProps) => {
       <IconLogoMedium />
       <PhoneInput
         imageSource={{ uri: '' }}
-        image={<Image color={theme.palette.accent.primary} />}
+        //image={<Image color={theme.palette.accent.primary} />}
         onValueChanged={setPhone}
         isValid={true}
         placeholder="Номер телефона"

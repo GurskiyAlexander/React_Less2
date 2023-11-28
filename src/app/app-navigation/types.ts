@@ -14,4 +14,8 @@ export type StackParamList = {
     sum: number
     isSuccess: boolean
   }
+  authResult: undefined
+  otp: undefined
+  password: undefined
+  phoneNumber: undefined
 }

@@ -3,7 +3,7 @@ import { StackParamList } from './types'
 import { useTheme } from '@shared/hooks'
 import React from 'react'
 import {
-  AuthSuccessPage,
+  AuthResultPage,
   OTPPage,
   PasswordPage,
   PhoneNumberPage,
@@ -30,8 +30,8 @@ export const AuthScreenNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="authSuccess"
-        component={AuthSuccessPage}
+        name="authResult"
+        component={AuthResultPage}
         options={{ headerShown: false }}
       />
       <Stack.Screen

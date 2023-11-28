@@ -1,14 +1,11 @@
-import { useEffect } from 'react'
 import { StackParamList } from '@app/app-navigation/types'
 import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types'
-
+import React, { useEffect } from 'react'
 import { CategoryUI } from '../../../entities/payments/types'
-import { useStore } from 'effector-react'
-import {
-  $fetchCategories,
-  fetchCategoriesFx,
-} from '@entities/payments/model/category-store'
-import { PaymentCategoryListPage } from '@flows/index'
+import { PaymentCategoryListPage } from './payment-category-list-page'
+import { mapPaymentToUi } from '@entities/payments/model/mappers/map-payment-to-ui'
+import { updateSnackList } from '@features/snack/model/snackbar-store'
+import { useGetCategory } from '../model'
 
 type PaymentCategoryListPageProps = NativeStackScreenProps<
   StackParamList,
@@ -18,11 +15,14 @@ type PaymentCategoryListPageProps = NativeStackScreenProps<
 export const PaymentCategoryListPageContainer = ({
   navigation,
 }: PaymentCategoryListPageProps) => {
-  const { data, isLoading } = useStore($fetchCategories)
+  const { data, isLoading, isError, refetch } = useGetCategory()
+  const categories = mapPaymentToUi({ category: data?.category ?? [] })
 
   useEffect(() => {
-    fetchCategoriesFx()
-  }, [])
+    if (isError) {
+      updateSnackList({ duration: 10000, message: 'Повторите попытку позже' })
+    }
+  }, [isError])
 
   const goToPaymentsCategory = (category: CategoryUI) => {
     navigation.navigate('paymentsCategory', {
@@ -31,5 +31,12 @@ export const PaymentCategoryListPageContainer = ({
     })
   }
 
-  return PaymentCategoryListPage({ goToPaymentsCategory, data, isLoading })
+  return (
+    <PaymentCategoryListPage
+      goToPaymentsCategory={goToPaymentsCategory}
+      data={categories}
+      isLoading={isLoading}
+      refetch={refetch}
+    />
+  )
 }

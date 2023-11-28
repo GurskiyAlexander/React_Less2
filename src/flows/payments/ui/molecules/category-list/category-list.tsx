@@ -3,12 +3,8 @@ import { Separator } from '@shared/ui/atoms/separator/separator'
 import { styled } from '@shared/ui/theme'
 import React from 'react'
 import { FlatList, RefreshControl } from 'react-native'
-import { fetchCategoriesFx } from '@entities/payments/model/category-store'
-
-import { TitledImageItem } from '../title-image-item/title-image-item'
+import { TitleImageItem } from '../title-image-item/title-image-item'
 import { useTheme } from '@shared/hooks'
-import { useGetCategory } from '@flows/payments/payments-category-page/model'
-import { mapPaymentToUi } from '@entities/payments/model/mappers/map-payment-to-ui'
 
 const CategoryFlatList = styled(FlatList<CategoryUI>)`
   flex: 1;
@@ -17,16 +13,16 @@ const CategoryFlatList = styled(FlatList<CategoryUI>)`
 type CategoriesListProps = {
   data: CategoryUI[]
   onPress: (category: CategoryUI) => void
+  refetch: () => void
+  isLoading: boolean
 }
 
-export const CategoriesList = ({ onPress }: CategoriesListProps) => {
-  const { data, isLoading } = useGetCategory()
-  const categories = mapPaymentToUi({ category: data?.category ?? [] })
-  const onRefresh = React.useCallback(() => {
-    setTimeout(() => {
-      fetchCategoriesFx()
-    }, 2000)
-  }, [])
+export const CategoriesList = ({
+  data,
+  onPress,
+  refetch,
+  isLoading,
+}: CategoriesListProps) => {
   const theme = useTheme()
 
   return (
@@ -34,13 +30,13 @@ export const CategoriesList = ({ onPress }: CategoriesListProps) => {
       refreshControl={
         <RefreshControl
           refreshing={isLoading}
-          onRefresh={onRefresh}
+          onRefresh={refetch}
           tintColor={theme.palette.text.primary}
         />
       }
-      data={categories}
+      data={data}
       renderItem={({ item }) => (
-        <TitledImageItem
+        <TitleImageItem
           isCategoryImage={true}
           title={item.categoryName}
           imageUrl={item.categoryIcon}

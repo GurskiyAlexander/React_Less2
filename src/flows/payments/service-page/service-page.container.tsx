@@ -1,16 +1,20 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { StackParamList } from '@app/app-navigation/types'
 import { useState } from 'react'
-import { useGetService } from './model'
-import { usePostPayment } from './model'
+import { useGetService } from '../model'
+import { usePostPayment } from '../model'
 import { ServicePage } from './service-page'
+import React from 'react'
 
 const maxCost = 20000
 const phoneNumberCorrectLength = 18
 
 type ServiceScreenProps = NativeStackScreenProps<StackParamList, 'service'>
 
-export const ServicePageContainer = ({ route, navigation }: ServiceScreenProps) => {
+export const ServicePageContainer = ({
+  route,
+  navigation,
+}: ServiceScreenProps) => {
   const [isValidPhone, setIsValidPhone] = useState(true)
   const [isValidCost, setIsValidCost] = useState(true)
   const [cost, setCost] = useState('')
@@ -32,7 +36,7 @@ export const ServicePageContainer = ({ route, navigation }: ServiceScreenProps) 
     setPhone(phone)
   }
 
-  const postValus = (correctData: boolean) => {
+  const postValues = (correctData: boolean) => {
     if (correctData) {
       mutate(
         {
@@ -59,8 +63,18 @@ export const ServicePageContainer = ({ route, navigation }: ServiceScreenProps) 
     const correctCost = Number(cost) > 1 && Number(cost) < maxCost
     setIsValidPhone(correctPhone)
     setIsValidCost(correctCost)
-    postValus(correctPhone && correctCost)
+    postValues(correctPhone && correctCost)
   }
 
-  return ServicePage({ changedPhone, changedCost, isValidPhone, isValidCost, cashBack: data?.cashback_percentage ?? 0, iconSource: route.params.service.serviceIcon, validateValues })
+  return (
+    <ServicePage
+      changedPhone={changedPhone}
+      changedCost={changedCost}
+      isValidPhone={isValidPhone}
+      isValidCost={isValidCost}
+      cashBack={data?.cashback_percentage ?? 0}
+      iconSource={route.params.service.serviceIcon}
+      validateValues={validateValues}
+    />
+  )
 }

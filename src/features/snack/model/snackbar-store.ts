@@ -1,5 +1,5 @@
 import { createEvent, createStore } from 'effector'
-import { SnackModel } from './types'
+import { SnackModel } from '../types'
 
 export const updateSnackList = createEvent<SnackModel | undefined>()
 export const $snackList = createStore<SnackModel[]>([])

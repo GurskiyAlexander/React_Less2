@@ -3,13 +3,13 @@ import { DevSettings } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
 import { AppThemeProvider, styled } from '@shared/ui/theme'
-import { SnackBar } from '@features/snack/snackbar'
 import { queryClient } from '@shared/index'
 import { asyncStoragePersister } from '@shared/api/config/query-client'
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
 
 import { Storybook } from '../../.storybook'
 import { AppNavigation } from './app-navigation/app-navigation'
+import { SnackBarContainer } from '@features/snack/snackbar.container'
 
 const StorybookButton = styled.TouchableOpacity`
   height: 32px;
@@ -63,7 +63,7 @@ export const App = () => {
             <SafeAreaProvider>
               <Wrapper>
                 <AppNavigation />
-                <SnackBar />
+                <SnackBarContainer />
               </Wrapper>
             </SafeAreaProvider>
           </NavigationContainer>

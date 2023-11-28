@@ -2,6 +2,7 @@ import React from 'react'
 import { ActivityIndicator } from 'react-native'
 import { styled } from '@shared/ui/theme'
 import { Typography } from '@shared/ui/atoms'
+
 import { CategoryUI } from '../../../entities/payments/types'
 import { CategoriesList } from '../ui/molecules/category-list/category-list'
 
@@ -24,24 +25,18 @@ const HeaderText = styled(Typography)`
   margin: 0 0 8px 16px;
 `
 
-const PaymentsHeader = () => {
-  return (
-    <Header>
-      <HeaderText variant="title">Платежи</HeaderText>
-    </Header>
-  )
-}
-
 type Props = {
   goToPaymentsCategory: (category: CategoryUI) => void
-  data: CategoryUI[] | null
+  data: CategoryUI[]
   isLoading: boolean
+  refetch: () => void
 }
 
 export const PaymentCategoryListPage = ({
   goToPaymentsCategory,
   data,
   isLoading,
+  refetch,
 }: Props) => {
   if (!data && isLoading) {
     return (
@@ -52,8 +47,15 @@ export const PaymentCategoryListPage = ({
   }
   return (
     <Wrapper>
-      <PaymentsHeader />
-      <CategoriesList data={data!} onPress={goToPaymentsCategory} />
+      <Header>
+        <HeaderText variant="title">Платежи</HeaderText>
+      </Header>
+      <CategoriesList
+        data={data}
+        onPress={goToPaymentsCategory}
+        refetch={refetch}
+        isLoading={isLoading}
+      />
     </Wrapper>
   )
 }
