@@ -1,1 +1,1 @@
-export { AtmsPage } from "./atms-page";
+export { AtmsPage } from './atms-page'

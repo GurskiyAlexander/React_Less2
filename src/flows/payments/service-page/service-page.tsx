@@ -1,13 +1,9 @@
 import React from 'react'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { StackParamList } from '@app/app-navigation/types'
-import { useState } from 'react'
 import { styled } from '@shared/ui/theme'
 import { useHeaderHeight } from '@react-navigation/elements'
 import { Keyboard, TouchableOpacity, View } from 'react-native'
-
-import { CostView, PhoneInput, CardView, Button } from './ui'
-import { ServicePageContainer } from './service-page.container'
+import { WithTitleButton } from '@shared/ui/molecules'
+import { CostView, PhoneInput, CardView } from './ui'
 
 const SafeAreaWrapper = styled.SafeAreaView`
   flex: 1;
@@ -22,19 +18,26 @@ const Wrapper = styled.KeyboardAvoidingView`
   background-color: ${({ theme }) => theme.palette.background.primary};
 `
 
-type PaymentScreenProps = NativeStackScreenProps<StackParamList, 'service'>
+type Props = {
+  changedPhone: (phone: string) => void
+  changedCost: (cost: string) => void
+  isValidPhone: boolean
+  isValidCost: boolean
+  cashBack: number
+  iconSource: string
+  validateValues: () => void
+}
 
-export const ServicePage = ({ route, navigation }: PaymentScreenProps) => {
-  const [phone, setPhone] = useState('')
-  const [cost, setCost] = useState('')
+export const ServicePage = ({
+  changedPhone,
+  changedCost,
+  isValidPhone,
+  isValidCost,
+  cashBack,
+  iconSource,
+  validateValues,
+}: Props) => {
   const headerHeight = useHeaderHeight()
-  const { isValidPhone, isValidCost, validateValues, cashBack } =
-    ServicePageContainer({
-      serviceInfo: route.params.service,
-      phone: phone,
-      cost: cost,
-      navigation: navigation,
-    })
 
   return (
     <SafeAreaWrapper>
@@ -43,13 +46,13 @@ export const ServicePage = ({ route, navigation }: PaymentScreenProps) => {
           <View>
             <CardView />
             <PhoneInput
-              imageSource={{ uri: route.params.service.serviceIcon }}
-              onValueChanged={setPhone}
+              imageSource={{ uri: iconSource }}
+              onValueChanged={changedPhone}
               isValid={isValidPhone}
               placeholder="Номер телефона"
             />
             <CostView
-              onValueChanged={setCost}
+              onValueChanged={changedCost}
               isValid={isValidCost}
               cashback={cashBack}
             />
@@ -57,7 +60,7 @@ export const ServicePage = ({ route, navigation }: PaymentScreenProps) => {
         </TouchableOpacity>
       </Wrapper>
       <SpacerView />
-      <Button title="Продолжить" onPress={validateValues} />
+      <WithTitleButton title="Продолжить" onPress={validateValues} />
     </SafeAreaWrapper>
   )
 }
