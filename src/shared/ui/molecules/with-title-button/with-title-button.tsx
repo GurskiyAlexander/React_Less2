@@ -16,7 +16,7 @@ const Wrapper = styled.TouchableOpacity`
   align-items: center;
 `
 
-export const Button = ({ title, onPress }: ButtonProps) => {
+export const WithTitleButton = ({ title, onPress }: ButtonProps) => {
   return (
     <Wrapper activeOpacity={0.7} onPress={onPress}>
       <Typography variant="button">{title}</Typography>

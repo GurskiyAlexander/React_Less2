@@ -2,12 +2,10 @@ import React from 'react'
 import { StackParamList } from '@app/app-navigation/types'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useTheme } from '@shared/hooks'
-import {
-  ServicePage,
-  PaymentsCategoryPage,
-  PaymentCategoryListPage,
-} from '@flows/index'
-import { SuccessPage } from '@flows/payments/success-page/succes-page'
+import { PaymentsCategoryPageContainer } from '@flows/index'
+import { PaymentResultPage } from '@flows/payments/payment-result-page/payment-result-page'
+import { ServicePageContainer } from '@flows/payments/service-page/service-page.container'
+import { PaymentCategoryListPageContainer } from '@flows/payments'
 
 const Stack = createNativeStackNavigator<StackParamList>()
 
@@ -26,22 +24,22 @@ export const PaymentsScreenNavigator = () => {
     >
       <Stack.Screen
         name="payments"
-        component={PaymentCategoryListPage}
+        component={PaymentCategoryListPageContainer}
         options={{ headerShown: false }}
       />
       <Stack.Screen
         name="paymentsCategory"
-        component={PaymentsCategoryPage}
+        component={PaymentsCategoryPageContainer}
         options={({ route }) => ({ title: route.params.title })}
       />
       <Stack.Screen
         name="service"
-        component={ServicePage}
+        component={ServicePageContainer}
         options={({ route }) => ({ title: route.params.title })}
       />
       <Stack.Screen
-        name="success"
-        component={SuccessPage}
+        name="paymentResult"
+        component={PaymentResultPage}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

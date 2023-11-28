@@ -1,17 +1,9 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { ActivityIndicator } from 'react-native'
 import { styled } from '@shared/ui/theme'
-import { StackParamList } from '@app/app-navigation/types'
 import { Typography } from '@shared/ui/atoms'
-import { NativeStackScreenProps } from '@react-navigation/native-stack/lib/typescript/src/types'
-
 import { CategoryUI } from '../../../entities/payments/types'
 import { CategoriesList } from '../ui/molecules/category-list/category-list'
-import { useStore } from 'effector-react'
-import {
-  $fetchCategories,
-  fetchCategoriesFx,
-} from '@entities/payments/model/category-store'
 
 const Wrapper = styled.View`
   flex: 1;
@@ -40,37 +32,28 @@ const PaymentsHeader = () => {
   )
 }
 
-type PaymentCategoryListPageProps = NativeStackScreenProps<
-  StackParamList,
-  'payments'
->
+type Props = {
+  goToPaymentsCategory: (category: CategoryUI) => void
+  data: CategoryUI[] | null
+  isLoading: boolean
+}
 
 export const PaymentCategoryListPage = ({
-  navigation,
-}: PaymentCategoryListPageProps) => {
-  const { data, isLoading } = useStore($fetchCategories)
-
-  useEffect(() => {
-    fetchCategoriesFx()
-  }, [])
-
-  const goToPaymentsCategory = (category: CategoryUI) => {
-    navigation.navigate('paymentsCategory', {
-      title: category.categoryName,
-      id: category.categoryId,
-    })
+  goToPaymentsCategory,
+  data,
+  isLoading,
+}: Props) => {
+  if (!data && isLoading) {
+    return (
+      <ActivityIndicatorContainer>
+        <ActivityIndicator size="large" />
+      </ActivityIndicatorContainer>
+    )
   }
-
   return (
     <Wrapper>
       <PaymentsHeader />
-      {!data && isLoading ? (
-        <ActivityIndicatorContainer>
-          <ActivityIndicator size="large" />
-        </ActivityIndicatorContainer>
-      ) : (
-        <CategoriesList data={data!} onPress={goToPaymentsCategory} />
-      )}
+      <CategoriesList data={data!} onPress={goToPaymentsCategory} />
     </Wrapper>
   )
 }

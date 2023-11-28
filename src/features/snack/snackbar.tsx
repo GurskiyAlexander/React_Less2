@@ -1,17 +1,14 @@
 import { Typography } from '@shared/ui/atoms'
 import { styled } from '@shared/ui/theme'
 import { useStore } from 'effector-react'
-import { useEffect, useState } from 'react'
 import React from 'react'
 import { IconClose } from '@shared/ui/icons'
 import { useTheme } from '@shared/hooks'
 
-import {
-  $snackList,
-  updateSnackList,
-} from '../../../../entities/snacks/model/snackbar-store'
+import { $snackList } from './snackbar-store'
+import { SnackBarContainer } from './snackbar.container'
 
-const Container = styled.View`
+const Container = styled.TouchableOpacity`
   justify-content: space-between;
   align-items: center;
   background: ${({ theme }) => theme.palette.indicator.error};
@@ -24,7 +21,7 @@ const Container = styled.View`
   padding: 16px;
 `
 
-const CloseView = styled.TouchableOpacity`
+const CloseView = styled.View`
   justify-content: center;
   align-items: center;
 `
@@ -32,31 +29,18 @@ const CloseView = styled.TouchableOpacity`
 export const SnackBar = () => {
   const theme = useTheme()
   const snackList = useStore($snackList)
-  const [isVisible, setIsVisible] = useState(false)
+  const { pressedClose, isVisible } = SnackBarContainer()
 
-  useEffect(() => {
-    if (snackList.length != 0) {
-      setIsVisible(true)
-      const snack = snackList[0]
-      const timeout = setTimeout(() => {
-        updateSnackList()
-        setIsVisible(false)
-      }, snack.duration)
-      return () => clearTimeout(timeout)
-    }
-  }, [snackList])
-
-  const pressedClose = () => {
-    updateSnackList()
-    setIsVisible(false)
+  if (!isVisible) {
+    return null
   }
 
-  return isVisible ? (
-    <Container>
+  return (
+    <Container activeOpacity={0.7} onPress={pressedClose}>
       <Typography variant="body15Regular">{snackList[0]?.message}</Typography>
-      <CloseView activeOpacity={0.7} onPress={pressedClose}>
+      <CloseView>
         <IconClose color={theme.palette.text.primary} />
       </CloseView>
     </Container>
-  ) : null
+  )
 }
