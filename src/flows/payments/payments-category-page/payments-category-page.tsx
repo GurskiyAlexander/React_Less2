@@ -10,7 +10,7 @@ import {
   SearchTextInput,
   FlexWrapper,
 } from './ui/atoms'
-import { ActivityIndicator } from 'react-native'
+import { ActivityIndicator, RefreshControl } from 'react-native'
 import { styled } from '@shared/ui/theme'
 import { ServiceUI } from '@entities/payments/types'
 
@@ -19,6 +19,8 @@ type Props = {
   onChangeText: (text: string) => void
   isLoading: boolean
   onPress: (item: ServiceUI) => void
+  refetch: () => void
+  isRefetching: boolean
 }
 
 const ActivityIndicatorContainer = styled(FlexWrapper)`
@@ -31,6 +33,8 @@ export const PaymentsCategoryPage = ({
   onChangeText,
   isLoading,
   onPress,
+  refetch,
+  isRefetching,
 }: Props) => {
   const theme = useTheme()
 
@@ -71,6 +75,13 @@ export const PaymentsCategoryPage = ({
               onPress={() => onPress(item)}
             />
           )}
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefetching}
+              onRefresh={refetch}
+              tintColor={theme.palette.text.primary}
+            />
+          }
         />
       </FlexWrapper>
     </WrapperKeyboardAvoiding>
