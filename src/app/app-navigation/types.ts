@@ -1,13 +1,21 @@
-import { ServiceUI } from "@entities/payments/types";
+import { ServiceUI } from '@entities/payments/types'
 
 export type StackParamList = {
-    payments: undefined,
-    paymentsCategory: {
-        title: string,
-        services: ServiceUI[]
-    }
-    service: {
-        title: string,
-        service: ServiceUI
-    },
+  payments: undefined
+  paymentsCategory: {
+    title: string
+    id: string
+  }
+  service: {
+    title: string
+    service: ServiceUI
+  }
+  paymentResult: {
+    sum: number
+    isSuccess: boolean
+  }
+  authResult: undefined
+  otp: undefined
+  password: undefined
+  phoneNumber: undefined
 }

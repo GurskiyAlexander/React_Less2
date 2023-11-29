@@ -8,6 +8,7 @@ type PropsTemplateView = {
 
 const TemplateContainer = styled.View`
   flex: 1;
+  padding: 20px
   justify-content: center;
   align-items: center;
   background: ${({ theme }) => theme.palette.background.primary};

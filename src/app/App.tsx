@@ -3,9 +3,13 @@ import { DevSettings } from 'react-native'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { NavigationContainer } from '@react-navigation/native'
 import { AppThemeProvider, styled } from '@shared/ui/theme'
+import { queryClient } from '@shared/index'
+import { asyncStoragePersister } from '@shared/api/config/query-client'
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client'
 
-import { AppNavigation } from './app-navigation/app-navigation'
 import { Storybook } from '../../.storybook'
+import { AppNavigation } from './app-navigation/app-navigation'
+import { SnackBarContainer } from '@features/snack/snackbar.container'
 
 const StorybookButton = styled.TouchableOpacity`
   height: 32px;
@@ -21,7 +25,6 @@ const StorybookButtonText = styled.Text`
 const Wrapper = styled.View`
   flex: 1;
 `
-
 export const App = () => {
   const [isStorybookVisible, setIsStorybookVisible] = React.useState(false)
 
@@ -52,13 +55,19 @@ export const App = () => {
   return (
     <StrictMode>
       <AppThemeProvider>
-        <NavigationContainer>
-          <SafeAreaProvider>
-            <Wrapper>
-              <AppNavigation />
-            </Wrapper>
-          </SafeAreaProvider>
-        </NavigationContainer>
+        <PersistQueryClientProvider
+          client={queryClient}
+          persistOptions={{ persister: asyncStoragePersister }}
+        >
+          <NavigationContainer>
+            <SafeAreaProvider>
+              <Wrapper>
+                <AppNavigation />
+                <SnackBarContainer />
+              </Wrapper>
+            </SafeAreaProvider>
+          </NavigationContainer>
+        </PersistQueryClientProvider>
       </AppThemeProvider>
     </StrictMode>
   )

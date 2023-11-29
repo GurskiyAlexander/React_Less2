@@ -1,5 +1,5 @@
 import React from 'react'
-import { MainPage, AtmsPage, ProfilePage } from '@flows/pages'
+import { MainPage, AtmsPage, ProfilePage } from '@flows/index'
 import { useTheme } from '@shared/hooks'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import {
