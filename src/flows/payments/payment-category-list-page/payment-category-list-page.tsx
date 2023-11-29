@@ -30,6 +30,7 @@ type Props = {
   data: CategoryUI[]
   isLoading: boolean
   refetch: () => void
+  isRefetching: boolean
 }
 
 export const PaymentCategoryListPage = ({
@@ -37,6 +38,7 @@ export const PaymentCategoryListPage = ({
   data,
   isLoading,
   refetch,
+  isRefetching,
 }: Props) => {
   if (!data && isLoading) {
     return (
@@ -54,7 +56,7 @@ export const PaymentCategoryListPage = ({
         data={data}
         onPress={goToPaymentsCategory}
         refetch={refetch}
-        isLoading={isLoading}
+        isLoading={isRefetching}
       />
     </Wrapper>
   )

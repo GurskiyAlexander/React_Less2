@@ -6,14 +6,14 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { StackParamList } from '@app/app-navigation/types'
 import React from 'react'
 
-import { useGetPayments } from '../model'
+import { useGetPayments } from '../../../entities/payments/model'
 import { PaymentsCategoryPage } from './payments-category-page'
 
 type Props = NativeStackScreenProps<StackParamList, 'paymentsCategory'>
 
 export const PaymentsCategoryPageContainer = ({ route, navigation }: Props) => {
   const [query, setQuery] = useState('')
-  const { data, isLoading, isError } = useGetPayments()
+  const { data, isLoading, isError, refetch, isRefetching } = useGetPayments()
   const category = data?.category.find(
     (item) => item.category_id == route.params.id,
   )
@@ -44,6 +44,8 @@ export const PaymentsCategoryPageContainer = ({ route, navigation }: Props) => {
       onChangeText={onChangeText}
       isLoading={isLoading}
       onPress={onPress}
+      refetch={refetch}
+      isRefetching={isRefetching}
     />
   )
 }

@@ -1,8 +1,8 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { StackParamList } from '@app/app-navigation/types'
 import { useState } from 'react'
-import { useGetService } from '../model'
-import { usePostPayment } from '../model'
+import { useGetService } from '../../../entities/payments/model'
+import { usePostPayment } from '../../../entities/payments/model'
 import { ServicePage } from './service-page'
 import React from 'react'
 

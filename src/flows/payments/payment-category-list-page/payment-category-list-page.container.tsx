@@ -5,7 +5,7 @@ import { CategoryUI } from '../../../entities/payments/types'
 import { PaymentCategoryListPage } from './payment-category-list-page'
 import { mapPaymentToUi } from '@entities/payments/model/mappers/map-payment-to-ui'
 import { updateSnackList } from '@features/snack/model/snackbar-store'
-import { useGetCategory } from '../model'
+import { useGetCategory } from '../../../entities/payments/model'
 
 type PaymentCategoryListPageProps = NativeStackScreenProps<
   StackParamList,
@@ -15,7 +15,7 @@ type PaymentCategoryListPageProps = NativeStackScreenProps<
 export const PaymentCategoryListPageContainer = ({
   navigation,
 }: PaymentCategoryListPageProps) => {
-  const { data, isLoading, isError, refetch } = useGetCategory()
+  const { data, isLoading, isError, refetch, isRefetching } = useGetCategory()
   const categories = mapPaymentToUi({ category: data?.category ?? [] })
 
   useEffect(() => {
@@ -37,6 +37,7 @@ export const PaymentCategoryListPageContainer = ({
       data={categories}
       isLoading={isLoading}
       refetch={refetch}
+      isRefetching={isRefetching}
     />
   )
 }
