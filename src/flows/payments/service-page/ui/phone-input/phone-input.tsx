@@ -2,9 +2,20 @@ import React, { useState } from 'react'
 import { ImageSourcePropType } from 'react-native'
 import { styled } from '@shared/ui/theme'
 import { validatePhoneNumber } from '@shared/utils/validate-phone-number'
+import { Loader } from '@shared/ui/molecules'
 
 type PhoneTextInputProps = {
   isValid: boolean
+}
+
+type PhoneInputProps = {
+  isValid: boolean
+  image: JSX.Element | undefined
+  placeholder: string
+  imageSource: ImageSourcePropType
+  onValueChanged: (value: string) => void
+  isShowClearButton: boolean
+  isShowLoader: boolean
 }
 
 const PhoneTextInput = styled.TextInput<PhoneTextInputProps>`
@@ -30,24 +41,26 @@ const PhoneView = styled.View`
   flex-direction: row;
 `
 
+const WrapperIcon = styled.View`
+  justify-content: center;
+`
 const Icon = styled.Image`
+  width: 24px;
+  height: 24px;
+`
+const LoaderWrapper = styled.View`
   width: 24px;
   height: 24px;
   align-self: center;
 `
-
-type PhoneInputProps = {
-  isValid: boolean
-  placeholder: string
-  imageSource: ImageSourcePropType
-  onValueChanged: (value: string) => void
-}
-
 export const PhoneInput = ({
   isValid,
+  image,
   placeholder,
   imageSource,
   onValueChanged,
+  isShowClearButton,
+  isShowLoader,
 }: PhoneInputProps) => {
   const [phone, setPhone] = useState('')
   const phoneMask = '+# (###) ### ## ##'
@@ -60,11 +73,13 @@ export const PhoneInput = ({
   return (
     <Wrapper>
       <PhoneView>
-        <Icon source={imageSource} />
+        <WrapperIcon>
+          {image ? image : <Icon source={imageSource} />}
+        </WrapperIcon>
         <PhoneTextInput
           isValid={isValid}
           placeholder={placeholder}
-          clearButtonMode="while-editing"
+          clearButtonMode={isShowClearButton ? 'while-editing' : 'never'}
           placeholderTextColor={isValid ? '#706D76' : '#FB6176'}
           maxLength={phoneMask.length}
           onChangeText={phoneNumberHandler}
@@ -75,6 +90,11 @@ export const PhoneInput = ({
             setPhone(phone.length == 0 ? '+7 ' : phone)
           }}
         />
+        {isShowLoader ? (
+          <LoaderWrapper>
+            <Loader />
+          </LoaderWrapper>
+        ) : null}
       </PhoneView>
     </Wrapper>
   )

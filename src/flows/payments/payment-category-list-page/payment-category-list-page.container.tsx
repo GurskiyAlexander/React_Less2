@@ -20,7 +20,11 @@ export const PaymentCategoryListPageContainer = ({
 
   useEffect(() => {
     if (isError) {
-      updateSnackList({ duration: 10000, message: 'Повторите попытку позже' })
+      updateSnackList({
+        duration: 10000,
+        message: 'Повторите попытку позже',
+        isButtonPosition: true,
+      })
     }
   }, [isError])
 

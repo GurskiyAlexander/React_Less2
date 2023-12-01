@@ -4,12 +4,21 @@ import { useTheme } from '@shared/hooks'
 import React from 'react'
 import {
   AuthResultPage,
-  OTPPage,
-  PasswordPage,
-  PhoneNumberPage,
+  OTPPageContainer,
+  PhoneNumberPageContainer,
+  PasswordPageContainer,
 } from '@flows/auth'
+import { MainScreenNavigator } from './main-screen-navigation'
+import { ErrorPage } from '@flows/auth/error-page/error-page'
+import { styled } from '@shared/ui/theme'
+import { IconClose } from '@shared/ui/icons'
 
 const Stack = createNativeStackNavigator<StackParamList>()
+const Wrapper = styled.TouchableOpacity`
+  display: flex;
+  align-content: center;
+  justify-content: center;
+`
 
 export const AuthScreenNavigator = () => {
   const theme = useTheme()
@@ -26,7 +35,7 @@ export const AuthScreenNavigator = () => {
     >
       <Stack.Screen
         name="phoneNumber"
-        component={PhoneNumberPage}
+        component={PhoneNumberPageContainer}
         options={{ headerShown: false }}
       />
       <Stack.Screen
@@ -36,13 +45,31 @@ export const AuthScreenNavigator = () => {
       />
       <Stack.Screen
         name="password"
-        component={PasswordPage}
+        component={PasswordPageContainer}
         options={{ headerShown: false }}
       />
       <Stack.Screen
         name="otp"
-        component={OTPPage}
+        component={OTPPageContainer}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="main"
+        component={MainScreenNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="error"
+        component={ErrorPage}
+        options={({ navigation }) => ({
+          headerShown: true,
+          headerTitle: '',
+          headerLeft: () => (
+            <Wrapper activeOpacity={0.7} onPress={() => navigation.goBack()}>
+              <IconClose color={theme.palette.accent.tertiary} />
+            </Wrapper>
+          ),
+        })}
       />
     </Stack.Navigator>
   )

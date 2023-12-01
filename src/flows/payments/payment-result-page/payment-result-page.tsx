@@ -30,7 +30,7 @@ export const PaymentResultPage = ({ navigation, route }: Props) => {
       <WithTitleButton
         title="Готово"
         onPress={() => navigation.navigate('payments')}
-      ></WithTitleButton>
+      />
     </Wrapper>
   )
 }

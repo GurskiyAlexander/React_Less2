@@ -6,7 +6,7 @@ import {
 } from '@entities/payments/types'
 import axios from 'axios'
 
-import { api } from '../config/api'
+import { mainApi } from '../config/api'
 
 export const getCategories = async () => {
   const response = await axios.get<CategoriesResponse>(
@@ -17,18 +17,22 @@ export const getCategories = async () => {
 }
 
 export const getPayment = async () => {
-  const response = await api.get<CategoriesResponse>('/api/core/payment/list')
+  const response = await mainApi.get<CategoriesResponse>(
+    '/api/core/payment/list',
+  )
   return response.data
 }
 
 export const getService = async (serviceId: string) => {
-  const response = await api.get<ServiceInfo>(`/api/core/payment/${serviceId}`)
+  const response = await mainApi.get<ServiceInfo>(
+    `/api/core/payment/${serviceId}`,
+  )
   return response.data
 }
 
 export const postPaymentOperation = async (
   body: RequestHistory,
 ): Promise<RequestStatus> => {
-  const response = await api.post('/api/core/history', body)
+  const response = await mainApi.post('/api/core/history', body)
   return response.data
 }
