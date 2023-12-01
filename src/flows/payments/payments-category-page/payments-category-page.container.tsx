@@ -30,7 +30,11 @@ export const PaymentsCategoryPageContainer = ({ route, navigation }: Props) => {
 
   useEffect(() => {
     if (isError) {
-      updateSnackList({ message: 'Что-то пошло не так', duration: 10000 })
+      updateSnackList({
+        message: 'Что-то пошло не так',
+        duration: 10000,
+        isButtonPosition: true,
+      })
     }
   }, [isError])
 

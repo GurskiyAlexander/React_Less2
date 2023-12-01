@@ -46,10 +46,13 @@ export const ServicePage = ({
           <View>
             <CardView />
             <PhoneInput
+              isShowLoader={false}
+              image={undefined}
               imageSource={{ uri: iconSource }}
               onValueChanged={changedPhone}
               isValid={isValidPhone}
               placeholder="Номер телефона"
+              isShowClearButton={true}
             />
             <CostView
               onValueChanged={changedCost}

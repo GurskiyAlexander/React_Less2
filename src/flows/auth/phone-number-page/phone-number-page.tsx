@@ -1,41 +1,70 @@
-import { StackParamList } from '@app/app-navigation/types'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import React, { useState } from 'react'
+import React from 'react'
 import { styled } from '@shared/ui/theme'
 import { IconLogoMedium, IconPhone } from '@shared/ui/icons'
 import { PhoneInput } from '@flows/payments/service-page/ui'
 import { useTheme } from '@shared/hooks'
+import { WithTitleButton } from '@shared/ui/molecules'
+import { Keyboard } from 'react-native'
 
-type PhoneNumberPageProps = NativeStackScreenProps<
-  StackParamList,
-  'phoneNumber'
->
-
-const Wrapper = styled.SafeAreaView`
+const Wrapper = styled.KeyboardAvoidingView`
   flex: 1
-  align-items: center
   background-color: ${({ theme }) => theme.palette.background.secondary}
-  padding-top: 16px
-  padding-bottom: 24px
 `
-
-const Image = styled(IconPhone)`
-  align-self: center;
+export const SafeAreaFlex = styled.SafeAreaView`
+  flex: 1;
 `
+const Spacer = styled.View`
+  flex: 1;
+`
+const IconWrapper = styled.View`
+  margin-bottom: 56px
+  align-items: center;
+`
+const TouchableView = styled.TouchableOpacity`
+  flex: 1;
+`
+type Props = {
+  isValid: boolean
+  isLoader: boolean
+  onValueChanged: (phone: string) => void
+  postValues: () => void
+}
 
-export const PhoneNumberPage = ({}: PhoneNumberPageProps) => {
+export const PhoneNumberPage = ({
+  isValid,
+  isLoader,
+  onValueChanged,
+  postValues,
+}: Props) => {
   const theme = useTheme()
-  const [phone, setPhone] = useState('')
   return (
-    <Wrapper>
-      <IconLogoMedium />
-      <PhoneInput
-        imageSource={{ uri: '' }}
-        //image={<Image color={theme.palette.accent.primary} />}
-        onValueChanged={setPhone}
-        isValid={true}
-        placeholder="Номер телефона"
-      />
+    <Wrapper behavior="padding">
+      <TouchableView activeOpacity={1} onPress={Keyboard.dismiss}>
+        <SafeAreaFlex>
+          <IconWrapper>
+            <IconLogoMedium />
+          </IconWrapper>
+          <PhoneInput
+            imageSource={{ uri: '' }}
+            image={
+              <IconPhone
+                color={
+                  isValid
+                    ? theme.palette.accent.primary
+                    : theme.palette.indicator.error
+                }
+              />
+            }
+            onValueChanged={(text) => onValueChanged(text)}
+            isValid={isValid}
+            placeholder="Номер телефона"
+            isShowClearButton={false}
+            isShowLoader={isLoader}
+          />
+          <Spacer />
+          <WithTitleButton title="Войти" onPress={postValues} />
+        </SafeAreaFlex>
+      </TouchableView>
     </Wrapper>
   )
 }

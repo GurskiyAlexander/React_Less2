@@ -5,6 +5,7 @@ export const updateSnackList = createEvent<SnackModel | undefined>()
 export const $snackList = createStore<SnackModel[]>([])
 $snackList.on(updateSnackList, (state, payload) => {
   if (!payload) {
+    state.shift()
     return state
   }
   if (!state.length) {

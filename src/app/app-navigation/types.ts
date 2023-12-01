@@ -18,4 +18,6 @@ export type StackParamList = {
   otp: undefined
   password: undefined
   phoneNumber: undefined
+  main: undefined
+  error: undefined
 }
