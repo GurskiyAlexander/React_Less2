@@ -1,4 +1,4 @@
-import { Keyboard, KeyboardAvoidingView } from 'react-native'
+import { KeyboardAvoidingView, ScrollView } from 'react-native'
 import React, { useState } from 'react'
 import { IconClose, IconLock, IconLogoMedium } from '@shared/ui/icons'
 import { styled } from '@shared/ui/theme'
@@ -20,9 +20,6 @@ const EnterPasswordText = styled(Typography)`
 const SafeAreaFlex = styled.SafeAreaView`
   flex: 1;
 `
-const Spacer = styled.View`
-  flex: 1;
-`
 const Wrapper = styled(KeyboardAvoidingView)`
   flex: 1;
   background-color: ${({ theme }) => theme.palette.background.secondary};
@@ -32,6 +29,7 @@ const PasswordContentWrapper = styled.View`
   padding: 16px;
   flex-direction: row;
   margin-top: 16px;
+  margin-bottom: 85%;
 `
 const PhoneView = styled.View`
     flex: 1
@@ -48,11 +46,8 @@ const PhoneTextInput = styled.TextInput`
   padding-right: 16px;
 `
 const HorizontalFlex = styled.View`
-flex: 1
+  flex: 1
   flex-direction: row;
-`
-const TouchableView = styled.TouchableOpacity`
-  flex: 1;
 `
 const IconWrapper = styled.View`
   margin-bottom: 56px
@@ -74,7 +69,7 @@ export const PasswordPage = ({
 
   return (
     <Wrapper behavior="padding">
-      <TouchableView activeOpacity={1} onPress={Keyboard.dismiss}>
+      <ScrollView bounces={false}>
         <SafeAreaFlex>
           <CloseButtonWrapper onPress={showAlert}>
             <IconClose color={theme.palette.text.primary} />
@@ -103,10 +98,9 @@ export const PasswordPage = ({
               />
             </PhoneView>
           </PasswordContentWrapper>
-          <Spacer />
           <WithTitleButton title="Войти" onPress={handleLogin} />
         </SafeAreaFlex>
-      </TouchableView>
+      </ScrollView>
     </Wrapper>
   )
 }

@@ -8,27 +8,27 @@ import { OTPPage } from './otp-page'
 import { usePostConfirm } from '@entities/auth/model/hooks/use-post-confirm'
 
 type Props = NativeStackScreenProps<StackParamList, 'otp'>
+const showAlert = (action: () => void) => {
+  Alert.alert(
+    'Вы ввели неверно код 5 раз',
+    'Данная сессия авторизации будет сброшена!',
+    [
+      {
+        text: 'Выход',
+        onPress: () => action,
+        style: 'default',
+      },
+    ],
+  )
+}
 
-let attempts = 5
 export const OTPPageContainer = ({ navigation }: Props) => {
   const authData = useStore($otpData)
   const phone = useStore($phone)
   const [code, setCode] = useState('')
   const [isValidOTP, setIsValidOTP] = useState(false)
+  const [attempts, setAttempts] = useState(5)
   const { mutate, isPending } = usePostConfirm()
-  const showAlert = () => {
-    Alert.alert(
-      'Вы ввели неверно код 5 раз',
-      'Данная сессия авторизации будет сброшена!',
-      [
-        {
-          text: 'Выход',
-          onPress: () => navigation.navigate('phoneNumber'),
-          style: 'default',
-        },
-      ],
-    )
-  }
 
   useEffect(() => {
     if (code.length < 4) {
@@ -37,7 +37,8 @@ export const OTPPageContainer = ({ navigation }: Props) => {
     }
     if (code !== authData?.otpCode) {
       setIsValidOTP(true)
-      attempts--
+      setAttempts((oldValue) => oldValue - 1)
+
       return
     }
     if (phone) {
@@ -58,14 +59,14 @@ export const OTPPageContainer = ({ navigation }: Props) => {
         },
       )
     }
-  }, [code, authData, phone])
+  }, [code, authData, phone, mutate, navigation])
 
   useEffect(() => {
     if (attempts == 0) {
-      attempts = 5
-      showAlert()
+      setAttempts(5)
+      showAlert(() => navigation.navigate('phoneNumber'))
     }
-  }, [attempts])
+  }, [attempts, navigation])
 
   return (
     <OTPPage

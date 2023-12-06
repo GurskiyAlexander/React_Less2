@@ -10,10 +10,6 @@ const SafeAreaWrapper = styled.SafeAreaView`
   background-color: ${({ theme }) => theme.palette.background.primary};
 `
 
-const SpacerView = styled.View`
-  flex: 1;
-`
-
 const Wrapper = styled.KeyboardAvoidingView`
   background-color: ${({ theme }) => theme.palette.background.primary};
 `
@@ -61,7 +57,6 @@ export const ServicePage = ({
           </View>
         </TouchableOpacity>
       </Wrapper>
-      <SpacerView />
       <WithTitleButton title="Продолжить" onPress={validateValues} />
     </SafeAreaWrapper>
   )
