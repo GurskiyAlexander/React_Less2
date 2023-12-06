@@ -2,8 +2,13 @@ import * as React from 'react'
 import Svg, { Circle, Path } from 'react-native-svg'
 
 import { TBaseIconProps } from './types'
-export const IconErrorFile = ({}: TBaseIconProps) => (
-  <Svg width={148} height={148} fill="none">
+export const IconErrorFile = ({ size }: TBaseIconProps) => (
+  <Svg
+    width={size ?? 148}
+    height={size ?? 148}
+    viewBox="0 0 148 148"
+    fill="none"
+  >
     <Circle cx={74} cy={74} r={74} fill="#403A47" />
     <Path
       fill="#6C78E6"

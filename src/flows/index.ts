@@ -1,5 +1,5 @@
-export { ServicePageContainer } from './payments/service-page/service-page.container'
-export { PaymentsCategoryPageContainer } from './payments/payments-category-page/payments-category-page.container'
+export { ServicePageContainer } from './payments/pages/service-page/service-page.container'
+export { PaymentsCategoryPageContainer } from './payments/pages/payments-category-page/payments-category-page.container'
 export { MainPage } from './main'
 export { AtmsPage } from './atms'
 export { ProfilePage } from './profile'

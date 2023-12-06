@@ -38,7 +38,7 @@ export const SnackBar = ({ pressedClose, isVisible, snackList }: Props) => {
     <Container
       activeOpacity={0.7}
       onPress={pressedClose}
-      isBottomPosition={snackList[0]?.isButtonPosition}
+      isBottomPosition={snackList[0]?.isBottomPosition ?? true}
     >
       <TextWrapper>
         <Typography variant="body15Regular">{snackList[0]?.message}</Typography>

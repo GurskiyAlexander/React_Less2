@@ -1,3 +1,5 @@
+export { IconErrorFile } from './icon-error-file'
+export { IconSuccessAuth } from './icon-success-auth'
 export { IconStar } from './icon-star'
 export { IconNotificationBadge } from './icon-notification-badge'
 export { IconBankAccount } from './icon-bank-account'

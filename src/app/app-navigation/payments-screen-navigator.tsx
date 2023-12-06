@@ -3,8 +3,8 @@ import { StackParamList } from '@app/app-navigation/types'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { useTheme } from '@shared/hooks'
 import { PaymentsCategoryPageContainer } from '@flows/index'
-import { PaymentResultPage } from '@flows/payments/payment-result-page/payment-result-page'
-import { ServicePageContainer } from '@flows/payments/service-page/service-page.container'
+import { PaymentResultPage } from '@flows/payments/pages/payment-result-page/payment-result-page'
+import { ServicePageContainer } from '@flows/payments/pages/service-page/service-page.container'
 import { PaymentCategoryListPageContainer } from '@flows/payments'
 
 const Stack = createNativeStackNavigator<StackParamList>()

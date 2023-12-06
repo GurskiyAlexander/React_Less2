@@ -1,3 +1,5 @@
+export { ResultView } from './result-view/result-view'
+export { HeaderLeftButton } from './header-left-button/header-left-button'
 export { Loader } from './loader/loader'
 export { WithTitleButton } from './with-title-button/with-title-button'
 export { TemplateView } from './template-view/template-view'

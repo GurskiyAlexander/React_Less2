@@ -4,7 +4,7 @@ import {
   EnterResponse,
   GuestToken,
   OTPResponse,
-} from '@entities/auth/model/types'
+} from '@entities/auth/types'
 
 import { authApi } from '../config/api'
 
